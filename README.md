@@ -74,6 +74,17 @@ We have built our own static code analyzer for Solidity. Our full analysis inclu
 - [Keccak-256](https://emn178.github.io/online-tools/keccak_256.html)
 - [Ethereum Function Signature Database](https://www.4byte.directory/)
 
+#### [The Truffle Framework](http://truffleframework.com/)
+- Truffle is the most popular development framework for Ethereum with a mission to make your life a whole lot easier.
+- Truffle: smart contract compilation, library linking, creation of contract artifacts, interacting with smart contracts on the front-end
+- Ganache (TestRPC): Personal blockchain and explorer for development   
+	- Quickly fire up a personal Ethereum blockchain which you can use to run tests, execute commands, and inspect state while controlling how the chain operates. 
+- Drizzle: Reactive web3 and smart contracts for easier integration with JS frameworks (coming soon)
+- Truffle Box: 
+
+#### Explorer for Blockchain
+- [MyEtherWallet](https://www.myetherwallet.com/): 
+
 ### Test Coverage
 #### Solidity-coverage
 - <https://github.com/sc-forks/solidity-coverage>
