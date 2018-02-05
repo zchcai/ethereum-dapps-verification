@@ -54,9 +54,10 @@ Executed  6266  instructions.
 - Visualize Solidity control flow
 - not support for EVM bytecode
 
-#### Dr.Y's Ethereum Contract Analyzer
-- <https://github.com/pirapira/dry-analyzer>
-- <http://dry.yoichihirai.com/>
+#### [Dr.Y's Ethereum Contract Analyzer](https://github.com/pirapira/dry-analyzer)
+- [Online Version](http://dry.yoichihirai.com/)
+- written in OCaml
+- 
 
 #### [Securify](https://securify.ch/)
 
@@ -69,6 +70,12 @@ We have built our own static code analyzer for Solidity. Our full analysis inclu
 
 ### Other Useful Development Tools or Testing Framework
 #### Disassembler
+- evmdis: human readable 
+- hevm: can specify some opcode behaviors
+- opcode-tool: Etherscan online  
+- evm disasm: 
+- Solidity online toolbox
+
 
 #### Function Signature
 - [Keccak-256](https://emn178.github.io/online-tools/keccak_256.html)
@@ -84,6 +91,60 @@ We have built our own static code analyzer for Solidity. Our full analysis inclu
 
 #### Explorer for Blockchain
 - [MyEtherWallet](https://www.myetherwallet.com/): 
+
+
+#### Decompiler
+- [porosity](https://github.com/comaeio/porosity) [(report)](https://www.comae.io/reports/dc25-msuiche-Porosity-Decompiling-Ethereum-Smart-Contracts-wp.pdf) (July 7, 2017)  [(talk at DEFCON25)](https://www.youtube.com/watch?v=d7EcNyuJy2g)
+	- Decompiler and Security Analysis tool for Blockchain-based Ethereum Smart-Contracts
+	- Three main usages:
+		1. Disassemble
+		2. Decompilation
+		3. Some bugs detection: (**TODO**: figure out the logic for each supported type)
+    - Notes:
+    	1. need to specify the environment variables: $bin, $binRuntime, and $abi. 
+    - Install
+    	1. Download from Github and follow this [page](https://www.reddit.com/r/ethdev/comments/6qmwn2/anyone_able_to_compile_porosity_on_linux/)
+    	2. Set env by ``abi=$(cat ./output/SendBalance.abi)''.
+    	3. ``-- code'' can be followed by $bin or $binRuntime
+        
+    - Problems/issues:
+    	1. executeInstruction: NOT_IMPLEMENTED: REVERT | NUMBER | MSIZE
+        
+    - Some try:
+    	1. For CryptoKitties geneScience contract, it crashed.
+
+<details>
+	<summary>click here to view <b>porosity help</b></summary>
+
+```
+parse: Please at least provide some byte code (--code) or run it in debug mode (--debug) with pre-configured inputs.
+Porosity v0.1 (https://www.comae.io)
+Matt Suiche, Comae Technologies <support@comae.io>
+The Ethereum bytecode commandline decompiler.
+Decompiles the given Ethereum input bytecode and outputs the Solidity code.
+
+
+Usage: porosity [options]
+Debug:
+    --debug                             - Enable debug mode. (testing only - no input parameter needed.)
+
+Input parameters:
+    --code <bytecode>                   - Ethereum bytecode. (mandatory)
+    --code-file <filename>              - Read ethereum bytecode from file
+    --arguments <arguments>             - Ethereum arguments to pass to the function. (optional, default data set provided if not provided.)
+    --abi <arguments>                   - Ethereum Application Binary Interface (ABI) in JSON format. (optional but recommended)
+    --hash <hashmethod>                 - Work on a specific function, can be retrieved wit --list. (optional)
+
+Features:
+    --list                              - List identified methods/functions.
+    --disassm                           - Disassemble the bytecode.
+    --single-step                       - Execute the byte code through our VM.
+    --cfg                               - Generate a the control flow graph in Graphviz format.
+    --cfg-full                          - Generate a the control flow graph in Graphviz format (including instructions)
+    --decompile                         - Decompile a given function or all the bytecode.
+```
+</details>    
+
 
 ### Test Coverage
 #### Solidity-coverage
@@ -104,7 +165,5 @@ We have built our own static code analyzer for Solidity. Our full analysis inclu
 ### Useful Resources
 - <https://github.com/pirapira/ethereum-formal-verification-overview>
 - [Week in Ethereum News](http://www.weekinethereum.com/)
+- [Solidity Bug Info](https://etherscan.io/solcbuginfo)
 
-
-## Our Efforts
-### Classify vulnerabilities
