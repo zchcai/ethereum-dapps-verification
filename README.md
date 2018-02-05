@@ -1,4 +1,4 @@
-- # Verification on Ethereum DApps
+ # Verification on Ethereum DApps
   ## State-of-the-art (updating)
   ### Publication
   #### Scilla: a Smart Contract Intermediate-Level LAnguage 
