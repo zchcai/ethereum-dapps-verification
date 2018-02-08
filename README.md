@@ -1,12 +1,25 @@
  # Verification on Ethereum DApps
   ## State-of-the-art (updating)
   ### Publication
-  #### Scilla: a Smart Contract Intermediate-Level LAnguage 
-  - Automata for Smart Contract Implementation and Verification
-  - <https://arxiv.org/abs/1801.00687>
+#### [Quantitative Analysis of Smart Contracts](https://arxiv.org/abs/1801.03367)
 
-  #### Decentralization in Bitcoin and Ethereum Networks
-  - <https://arxiv.org/abs/1801.03998>
+- (tbr)
+
+#### [Online Detection of Effectively Callback Free Objects with Applications to Smart Contracts](http://www.cs.tau.ac.il/~shellygr/pubs/2018-popl-1.pdf) (POPL 18)
+
+- (tbr)
+
+  #### [Scilla: a Smart Contract Intermediate-Level LAnguage](https://arxiv.org/abs/1801.00687) (Automata for Smart Contract Implementation and Verification) 
+
+- (tbr)
+
+  #### [Decentralization in Bitcoin and Ethereum Networks](https://arxiv.org/abs/1801.03998)
+
+- (tbr)
+
+#### [Make Smart Contracts Smarter](https://eprint.iacr.org/2016/633.pdf)
+
+- Oyente, a verification tool using symbolic exectuion. It declares that Oyente can detect four main vulnerabilities: timestamp dependency, front running (money concurrency), mishandled exceptions and reentry bugs. 
 
   ### Tools
   #### [Manticore](https://github.com/trailofbits/manticore)
