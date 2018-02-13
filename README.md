@@ -1,94 +1,142 @@
  # Verification on Ethereum DApps
   ## State-of-the-art (updating)
   ### Publication
-#### [Quantitative Analysis of Smart Contracts](https://arxiv.org/abs/1801.03367)
+#### [Quantitative Analysis of Smart Contracts](http://pub.ist.ac.at/~akafshda/paperpdfs/esop2018.pdf) (ESOP 18) (Apr 14-20)
+
+- Define a new simplified PL to write smart contracts, which can be converted into stateful games. Then they provide an abstraction-refinement approach for quantitative concurrent games to automatically analyze. 
+- What is stateful/stateless games?
+- mainly on section 4 and 5
+
+#### [Online Detection of Effectively Callback Free Objects with Applications to Smart Contracts](http://www.cs.tau.ac.il/~shellygr/pubs/2018-popl-1.pdf) (POPL 18) (Jan 10-12) ([video](https://www.youtube.com/watch?v=EU6RMP9hM7s))
+
+- Modular reasoning, module of reasoning
+  - This paper recommends Modular Verfication of Static Class Invariants, and, Ownership confinement ensures representation independence for OO programs
+  - It says this topic has been studied extensively with the seminal works of Hoare (Proof of correctness of data representation) and Dijkstra (A discipline of programming)
+  - http://www.cs.cmu.edu/~aldrich/oop/ It seems this is a good page to check.
+- $ECF_{FS}$: Final-State Effective Callback Freedom
+- $ECF_{C}$: Conflict Effective Callback Freedom:grey_question:
+  - Conflict graph-based algorithm
+    - Tracks read/write sets of invocations
+    - Builds conflict graph
+    - Checks for cycles
+- Dynamic checking is decidable.
+- [Code](https://github.com/shellygr/go-ethereum): Go Ethereum enhanced with ECF Checker, a dynamic monitor of the ECF property, based on Geth.
+- [TR](http://www.cs.tau.ac.il/~shellygr/pubs/ecf-tr.pdf) (Technical Report)
+
+[Scilla: a Smart Contract Intermediate-Level LAnguage](https://arxiv.org/abs/1801.00687) (Automata for Smart Contract Implementation and Verification)
+
+- TBR
+
+#### [Decentralization in Bitcoin and Ethereum Networks](https://arxiv.org/abs/1801.03998)
 
 - (tbr)
 
-#### [Online Detection of Effectively Callback Free Objects with Applications to Smart Contracts](http://www.cs.tau.ac.il/~shellygr/pubs/2018-popl-1.pdf) (POPL 18)
+#### [An Empirical Analysis of Smart Contracts: Platforms, Applications, and Design Patterns](https://arxiv.org/abs/1703.06322) ([WTSC 17](http://fc17.ifca.ai/wtsc/)@FC) (Apr 7)
 
-- (tbr)
+- ​
 
-  #### [Scilla: a Smart Contract Intermediate-Level LAnguage](https://arxiv.org/abs/1801.00687) (Automata for Smart Contract Implementation and Verification) 
+#### [A Concurrent Perspective on Smart Contracts](https://arxiv.org/pdf/1702.05511.pdf) (WTSC 17)
 
-- (tbr)
+- TBR
 
-  #### [Decentralization in Bitcoin and Ethereum Networks](https://arxiv.org/abs/1801.03998)
+#### [Formal verification of Smart Contracts](https://www.cs.umd.edu/~aseem/solidetherplas.pdf) (Short paper, workshop) (PLAS 16)
 
-- (tbr)
+- attempt to use F* framework to do formal verification on smart contracts
+- Solidity or EVM
 
-#### [Make Smart Contracts Smarter](https://eprint.iacr.org/2016/633.pdf)
+#### [A Survey of Attacks on Ethereum Smart Contracts](https://eprint.iacr.org/2016/1007.pdf) (IACR 16)
+
+- ​
+
+#### [Make Smart Contracts Smarter](https://eprint.iacr.org/2016/633.pdf) (IACR 16)
 
 - Oyente, a verification tool using symbolic exectuion. It declares that Oyente can detect four main vulnerabilities: timestamp dependency, front running (money concurrency), mishandled exceptions and reentry bugs. 
 
-  ### Tools
-  #### [Manticore](https://github.com/trailofbits/manticore)
-  - Manticore is a symbolic execution tool for analysis of binaries and smart contracts.
-    * Linux ELF binaries (x86, x86_64 and ARMv7)
-    * EVM bytecode ([video](https://asciinema.org/a/haJU2cl0R0Q3jB9wd733LVosL))
-      * Folder *example* provides *coverage*, *minimal* and so on. Mainly simple usages of API.
-  - [Manticore: Symbolic execution for humans](https://blog.trailofbits.com/2017/04/27/manticore-symbolic-execution-for-humans/)
-  - Dynamic binary analysis tool with EVM support (described in [Ethereum Smart Contract Best Practices](https://consensys.github.io/smart-contract-best-practices/security_tools/))
-  - CLI (Command-line Interface)
-  ```
-  czc@vultr:~/manticore/examples/linux$ manticore basic
-  2018-01-30 16:48:42,626: [7231] m.manticore:INFO: Loading program basic  
-  2018-01-30 16:48:52,257: [7231] m.manticore:INFO: Generated testcase No. 0 - Program finished with exit status: 0   
-  2018-01-30 16:48:53,831: [7231] m.manticore:INFO: Generated testcase No. 1 - Program finished with exit status: 0   
-  2018-01-30 16:48:53,834: [7231] m.manticore:INFO: Results in /home/czc/manticore/examples/linux/mcore_t9BiJE      
-  2018-01-30 16:48:53,834: [7231] m.manticore:INFO: Total time: 9.56235694885  
-  czc@vultr:~/manticore/examples/linux$ cat mcore_t9BiJE/test_00000000.stdin | ./basic   
-  Message: It is greater than 0x41   
-  czc@vultr:~/manticore/examples/linux$ cat mcore_t9BiJE/test_00000001.stdin | ./basic   
-  Message: It is less than or equal to 0x41 
-  ```
-  - API
-    * [API Reference](http://manticore.readthedocs.io/en/latest/api.html)
-    * [Manticore Documentation 0.1.0](https://media.readthedocs.org/pdf/manticore/latest/manticore.pdf) (released on Jan 30, 2018)
-  ```
-  czc@vultr:~/manticore/examples/script$ python count_instructions.py ../linux/helloworld   
-  Executed  6266  instructions. 
-  ```
+#### [Town Crier: An Authenticated Data Feed for Smart Contracts](https://eprint.iacr.org/2016/168.pdf) (IACR 16)
 
-  #### [Mythril](https://github.com/ConsenSys/mythril)
-  - Reversing and bug hunting framework for the Ethereum blockchain (described in [Ethereum Smart Contract Best Practices](https://consensys.github.io/smart-contract-best-practices/security_tools/))
-  - [Security analysis tool for Ethereum smart contracts](https://pypi.python.org/pypi/mythril) mythril 0.10.7
-  - Out of date documentation, [Mythril 0.8.0](https://www.pydoc.io/pypi/mythril-0.8.0/)
-  - Note that Mythril requires Python 3.5 to work.
-  - [Introducing Mythril: A framework for bug hunting on the Ethereum blockchain](https://hackernoon.com/introducing-mythril-a-framework-for-bug-hunting-on-the-ethereum-blockchain-9dc5588f82f6) by [Bernhard Mueller](https://hackernoon.com/@muellerberndt), a security engineer at [ConsenSys](https://new.consensys.net/).
-  - [Analyzing Ethereum smart contracts for vulnerabilities](https://hackernoon.com/scanning-ethereum-smart-contracts-for-vulnerabilities-b5caefd995df)
-  > In this article, I’ll show how to run different types of security scans with Mythril using smart contracts from the *Ethernaut wargame* as examples (thanks to the guys from *Zeppelin solutions* for giving me permission). If you haven’t tried the wargame yourself, be aware that there are spoilers ahead! I recommend giving it a shot yourself first if you haven’t already.
-  - [Mythril: The New Ethereum Blockchain Error Detector](https://steemit.com/blockchain/@rusinho027/mythril-the-new-ethereum-blockchain-error-detector)
-  - Upcoming Talk, April 12, 2018, [Smashing Ethereum Smart Contracts for Fun and ACTUAL Profit](https://conference.hitb.org/hitbsecconf2018ams/sessions/smashing-ethereum-smart-contracts-for-fun-and-actual-profit/), by [Bernhard Mueller](https://hackernoon.com/@muellerberndt)
+- TBR
 
-  #### [Solgraph](https://github.com/raineorshine/solgraph)
-  - Generates a DOT graph that visualizes function control flow of a Solidity contract and highlights potential security vulnerabilities.
-  - Visualize Solidity control flow
-  - not support for EVM bytecode
+#### [Scripting smart contracts for distributed ledger technology](https://eprint.iacr.org/2016/1156.pdf) (IACR 16)
 
-  #### [Dr.Y's Ethereum Contract Analyzer](https://github.com/pirapira/dry-analyzer)
-  - [Online Version](http://dry.yoichihirai.com/)
-  - written in OCaml
-  - ​
+- TBR
 
-  #### [Securify](https://securify.ch/)
-  - [Automatically Detecting the Bug that Froze Parity Wallets](https://medium.com/@SecurifySwiss/automatically-detecting-the-bug-that-froze-parity-wallets-ad2bebebd3b0)
+#### [The Ring of Gyges: Investigating the Future of Criminal Smart Contracts](https://eprint.iacr.org/2016/358.pdf) (IACR 16)
 
-  #### [SmartCheck](https://tool.smartdec.net/)
-  - provided by [SmartDec](https://smartcontracts.smartdec.net/)  
-  > SmartCheck: Static Code Analyzer  
-  > We have built our own static code analyzer for Solidity. Our full analysis includes complete manual analysis and verification of all the issues reported by SmartCheck.
+- TBR
 
-  #### Oyente
+#### [Step by Step towards Creating a Safe Smart Contract: Lessons and Insights from a Cryptocurrency Lab](https://eprint.iacr.org/2015/460.pdf) (IACR 15)
 
-  ### Other Useful Development Tools or Testing Framework
-  #### Disassembler
-  - evmdis: human readable 
-  - hevm: can specify some opcode behaviors
-  - opcode-tool: Etherscan online  
-  - evm disasm: 
-  - Solidity online toolbox
+- (TBR)
 
+
+### Tools
+
+#### [Manticore](https://github.com/trailofbits/manticore)
+- Manticore is a symbolic execution tool for analysis of binaries and smart contracts.
+  * Linux ELF binaries (x86, x86_64 and ARMv7)
+  * EVM bytecode ([video](https://asciinema.org/a/haJU2cl0R0Q3jB9wd733LVosL))
+    * Folder *example* provides *coverage*, *minimal* and so on. Mainly simple usages of API.
+- [Manticore: Symbolic execution for humans](https://blog.trailofbits.com/2017/04/27/manticore-symbolic-execution-for-humans/)
+- Dynamic binary analysis tool with EVM support (described in [Ethereum Smart Contract Best Practices](https://consensys.github.io/smart-contract-best-practices/security_tools/))
+- CLI (Command-line Interface)
+```
+czc@vultr:~/manticore/examples/linux$ manticore basic
+2018-01-30 16:48:42,626: [7231] m.manticore:INFO: Loading program basic  
+2018-01-30 16:48:52,257: [7231] m.manticore:INFO: Generated testcase No. 0 - Program finished with exit status: 0   
+2018-01-30 16:48:53,831: [7231] m.manticore:INFO: Generated testcase No. 1 - Program finished with exit status: 0   
+2018-01-30 16:48:53,834: [7231] m.manticore:INFO: Results in /home/czc/manticore/examples/linux/mcore_t9BiJE      
+2018-01-30 16:48:53,834: [7231] m.manticore:INFO: Total time: 9.56235694885  
+czc@vultr:~/manticore/examples/linux$ cat mcore_t9BiJE/test_00000000.stdin | ./basic   
+Message: It is greater than 0x41   
+czc@vultr:~/manticore/examples/linux$ cat mcore_t9BiJE/test_00000001.stdin | ./basic   
+Message: It is less than or equal to 0x41 
+```
+- API
+  * [API Reference](http://manticore.readthedocs.io/en/latest/api.html)
+  * [Manticore Documentation 0.1.0](https://media.readthedocs.org/pdf/manticore/latest/manticore.pdf) (released on Jan 30, 2018)
+```
+czc@vultr:~/manticore/examples/script$ python count_instructions.py ../linux/helloworld   
+Executed  6266  instructions. 
+```
+
+#### [Mythril](https://github.com/ConsenSys/mythril)
+- Reversing and bug hunting framework for the Ethereum blockchain (described in [Ethereum Smart Contract Best Practices](https://consensys.github.io/smart-contract-best-practices/security_tools/))
+- [Security analysis tool for Ethereum smart contracts](https://pypi.python.org/pypi/mythril) mythril 0.10.7
+- Out of date documentation, [Mythril 0.8.0](https://www.pydoc.io/pypi/mythril-0.8.0/)
+- Note that Mythril requires Python 3.5 to work.
+- [Introducing Mythril: A framework for bug hunting on the Ethereum blockchain](https://hackernoon.com/introducing-mythril-a-framework-for-bug-hunting-on-the-ethereum-blockchain-9dc5588f82f6) by [Bernhard Mueller](https://hackernoon.com/@muellerberndt), a security engineer at [ConsenSys](https://new.consensys.net/).
+- [Analyzing Ethereum smart contracts for vulnerabilities](https://hackernoon.com/scanning-ethereum-smart-contracts-for-vulnerabilities-b5caefd995df)
+> In this article, I’ll show how to run different types of security scans with Mythril using smart contracts from the *Ethernaut wargame* as examples (thanks to the guys from *Zeppelin solutions* for giving me permission). If you haven’t tried the wargame yourself, be aware that there are spoilers ahead! I recommend giving it a shot yourself first if you haven’t already.
+- [Mythril: The New Ethereum Blockchain Error Detector](https://steemit.com/blockchain/@rusinho027/mythril-the-new-ethereum-blockchain-error-detector)
+- Upcoming Talk, April 12, 2018, [Smashing Ethereum Smart Contracts for Fun and ACTUAL Profit](https://conference.hitb.org/hitbsecconf2018ams/sessions/smashing-ethereum-smart-contracts-for-fun-and-actual-profit/), by [Bernhard Mueller](https://hackernoon.com/@muellerberndt)
+
+#### [Solgraph](https://github.com/raineorshine/solgraph)
+- Generates a DOT graph that visualizes function control flow of a Solidity contract and highlights potential security vulnerabilities.
+- Visualize Solidity control flow
+- not support for EVM bytecode
+
+#### [Dr.Y's Ethereum Contract Analyzer](https://github.com/pirapira/dry-analyzer)
+- [Online Version](http://dry.yoichihirai.com/)
+- written in OCaml
+- ​
+
+#### [Securify](https://securify.ch/)
+- [Automatically Detecting the Bug that Froze Parity Wallets](https://medium.com/@SecurifySwiss/automatically-detecting-the-bug-that-froze-parity-wallets-ad2bebebd3b0)
+
+#### [SmartCheck](https://tool.smartdec.net/)
+- provided by [SmartDec](https://smartcontracts.smartdec.net/)  
+> SmartCheck: Static Code Analyzer  
+> We have built our own static code analyzer for Solidity. Our full analysis includes complete manual analysis and verification of all the issues reported by SmartCheck.
+
+#### Oyente
+
+### Other Useful Development Tools or Testing Framework
+#### Disassembler
+- evmdis: human readable 
+- hevm: can specify some opcode behaviors
+- opcode-tool: Etherscan online  
+- evm disasm: 
+- Solidity online toolbox
 
   #### Function Signature
   - [Keccak-256](https://emn178.github.io/online-tools/keccak_256.html)
