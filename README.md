@@ -10,7 +10,7 @@
 #### [Online Detection of Effectively Callback Free Objects with Applications to Smart Contracts](http://www.cs.tau.ac.il/~shellygr/pubs/2018-popl-1.pdf) (POPL 18) (Jan 10-12) ([video](https://www.youtube.com/watch?v=EU6RMP9hM7s))
 
 - Modular reasoning, module of reasoning
-  - This paper recommends Modular Verfication of Static Class Invariants, and, Ownership confinement ensures representation independence for OO programs
+  - This paper recommends [Modular Verification of Static Class Invariants](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/12/krml153.pdf), and, Ownership confinement ensures representation independence for OO programs
   - It says this topic has been studied extensively with the seminal works of Hoare (Proof of correctness of data representation) and Dijkstra (A discipline of programming)
   - http://www.cs.cmu.edu/~aldrich/oop/ It seems this is a good page to check.
 - $ECF_{FS}$: Final-State Effective Callback Freedom
@@ -33,7 +33,37 @@
 
 #### [An Empirical Analysis of Smart Contracts: Platforms, Applications, and Design Patterns](https://arxiv.org/abs/1703.06322) ([WTSC 17](http://fc17.ifca.ai/wtsc/)@FC) (Apr 7)
 
-- ​
+- Several platforms for smart contracts have been proposed, and this paper have analyzed the usage of smart contracts from various perspectives. Mainly, by manually analyzing 834 smart contracts from Ethereum (811, verified) and Bitcoin (23), it concludes 5 categories describing smart contracts intended application domain, and 9 design patterns. Among these, they observe that token, authorization, time constraint, and termination are generally the most used patterns. Also, they give the quantitative results in details.
+
+- Another contribution is the analysis of platforms. At first, they drew up a candidate list, 12 platforms, by examining all 175 articles of [coindesk.com](coindesk.com) in "smart contracts" category by Sept 15, 2016. Then ruled out half of them by 3 criteria:
+
+  - have already been launched,
+  - are running and supported from a community of developers, and
+  - are publicly accessible.
+
+  They get the sample of 6 platforms (Bitcoin, Ethereum, [Counterparty](https://counterparty.io/), [Stellar](https://www.reddit.com/r/Stellar/comments/78an74/welcome_to_rstellar_read_this_to_get_started/), Monax and Lisk), and give the results, mainly considering blockchain types, contract languages, transaction amount and market shares.
+
+- 5 categories:
+
+  - Financial
+  - Notary
+  - Game
+  - Wallet
+  - Library
+
+- 9 design patterns:
+
+  - Token
+  - Authorization: relating to critical operations
+  - Oracle: the interface between contracts and the outside
+  - Randomness
+  - Poll: allows users to vote on some question
+  - Time constrain
+  - Termination
+  - Math: e.g., [SafeMath.sol](https://github.com/OpenZeppelin/zeppelin-solidity/blob/master/contracts/math/SafeMath.sol)
+  - Fork check
+
+- Good survey, helpful to beginners. However, it didn't analyze DSL or VM used for smart contracts. For example, high-level languages like Solidity or Viper, and low-level virtual machines like EVM or IELE. Also, some platforms claim they support  
 
 #### [A Concurrent Perspective on Smart Contracts](https://arxiv.org/pdf/1702.05511.pdf) (WTSC 17)
 
@@ -101,24 +131,57 @@ Executed  6266  instructions.
 
 #### [Mythril](https://github.com/ConsenSys/mythril)
 - Reversing and bug hunting framework for the Ethereum blockchain (described in [Ethereum Smart Contract Best Practices](https://consensys.github.io/smart-contract-best-practices/security_tools/))
+
 - [Security analysis tool for Ethereum smart contracts](https://pypi.python.org/pypi/mythril) mythril 0.10.7
+
 - Out of date documentation, [Mythril 0.8.0](https://www.pydoc.io/pypi/mythril-0.8.0/)
-- Note that Mythril requires Python 3.5 to work.
+
+- Install
+
+  - require `libssl-dev`
+  - Currently, I use `python3 -m venv ./` in a test directory, then `cd bin` and `source activate`. 
+
+- Note
+  - Mythril requires Python 3.5 to work.
+  - It is built on [laser-ethereum](https://pypi.python.org/pypi/laser-ethereum/0.1.9), a [Z3-based](https://pypi.python.org/pypi/z3-solver/4.5.1.0) symbolic Ethereum VM. 
+
 - [Introducing Mythril: A framework for bug hunting on the Ethereum blockchain](https://hackernoon.com/introducing-mythril-a-framework-for-bug-hunting-on-the-ethereum-blockchain-9dc5588f82f6) by [Bernhard Mueller](https://hackernoon.com/@muellerberndt), a security engineer at [ConsenSys](https://new.consensys.net/).
+
+  > full node needs
+
 - [Analyzing Ethereum smart contracts for vulnerabilities](https://hackernoon.com/scanning-ethereum-smart-contracts-for-vulnerabilities-b5caefd995df)
 > In this article, I’ll show how to run different types of security scans with Mythril using smart contracts from the *Ethernaut wargame* as examples (thanks to the guys from *Zeppelin solutions* for giving me permission). If you haven’t tried the wargame yourself, be aware that there are spoilers ahead! I recommend giving it a shot yourself first if you haven’t already.
 - [Mythril: The New Ethereum Blockchain Error Detector](https://steemit.com/blockchain/@rusinho027/mythril-the-new-ethereum-blockchain-error-detector)
 - Upcoming Talk, April 12, 2018, [Smashing Ethereum Smart Contracts for Fun and ACTUAL Profit](https://conference.hitb.org/hitbsecconf2018ams/sessions/smashing-ethereum-smart-contracts-for-fun-and-actual-profit/), by [Bernhard Mueller](https://hackernoon.com/@muellerberndt)
 
+#### [Solidity Parser](https://github.com/consensys/solidity-parser)
+
+> A Solidity parser in Javascript. So we can evaluate and alter Solidity code without resorting to cruddy preprocessing.
+
+- In: Solidity code
+- Out: AST
+- Warning: not deal with constructor
+
 #### [Solgraph](https://github.com/raineorshine/solgraph)
+
+- In: AST (thus dependent on Solidity Parser)
+- Out: DOT graph
 - Generates a DOT graph that visualizes function control flow of a Solidity contract and highlights potential security vulnerabilities.
 - Visualize Solidity control flow
 - not support for EVM bytecode
+- a Node.js package
 
 #### [Dr.Y's Ethereum Contract Analyzer](https://github.com/pirapira/dry-analyzer)
-- [Online Version](http://dry.yoichihirai.com/)
-- written in OCaml
-- ​
+- [Online Version](http://dry.yoichihirai.com/) 
+  - Input: bytecodes
+- Programming language: OCaml
+- Notes:
+  - use and rename the pre-compiled one to `opam`, modify the `PATH` and wait `opam init` for a long time (about an hour). 
+  - It starts a web server at <localhost:xxxx>, xxxx is specified by yourself.
+- Code structure::grey_question:
+  - TODO
+- Issues:
+  - 20 open now in Github
 
 #### [Securify](https://securify.ch/)
 - [Automatically Detecting the Bug that Froze Parity Wallets](https://medium.com/@SecurifySwiss/automatically-detecting-the-bug-that-froze-parity-wallets-ad2bebebd3b0)
