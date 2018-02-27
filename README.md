@@ -1,6 +1,24 @@
  # Verification on Ethereum DApps
   ## State-of-the-art (updating)
   ### Publication
+#### [Finding The Greedy, Prodigal, and Suicidal Contracts at Scale](https://arxiv.org/pdf/1802.06038.pdf) (2018)
+
+>a new systematic characterization of a class of trace vulnerabilities, which result from analyzing multiple invocations of a contract over its lifetime
+>
+>three example properties of such trace vulnerabilities: 
+>
+>1. **Greedy**: lock funds indefinitely, 
+>2. **Prodigal** (very generous, recklessly wasteful): leak ether carelessly to arbitrary users, or 
+>3. **Suicidal**: can be killed by anyone.
+
+- MAIAN
+  - the first tool for precisely specifying and reasoning about trace properties, which employs inter-procedural symbolic analysis and concrete validator for exhibiting real exploits.
+  - two major components: symbolic analysis and concrete validation
+  - ​
+  - depth-first
+  - target at bytecode
+- ​
+
 #### [Quantitative Analysis of Smart Contracts](http://pub.ist.ac.at/~akafshda/paperpdfs/esop2018.pdf) (ESOP 18) (Apr 14-20)
 
 - Define a new simplified PL to write smart contracts, which can be converted into stateful games. Then they provide an abstraction-refinement approach for quantitative concurrent games to automatically analyze. 
@@ -23,15 +41,24 @@
 - [Code](https://github.com/shellygr/go-ethereum): Go Ethereum enhanced with ECF Checker, a dynamic monitor of the ECF property, based on Geth.
 - [TR](http://www.cs.tau.ac.il/~shellygr/pubs/ecf-tr.pdf) (Technical Report)
 
-[Scilla: a Smart Contract Intermediate-Level LAnguage](https://arxiv.org/abs/1801.00687) (Automata for Smart Contract Implementation and Verification)
+#### [Scilla: a Smart Contract Intermediate-Level LAnguage](https://arxiv.org/abs/1801.00687) (Automata for Smart Contract Implementation and Verification) ([GitHub](https://github.com/ilyasergey/scilla-coq))
 
-- TBR
+- Use Coq 8.7, State-Transition Systems for Smart Contracts: semantics and properties.
+- [Zilliqa](https://www.zilliqa.com/) is the world's first high-throughput public blockchain platform designed to scale to thousands of transactions per second. It brings the theory of sharding to practice with its novel protocol that increases transaction rates as its network expands. The platform is tailored towards enabling secure data-driven decentralized apps, designed to meet the scaling requirements of machine learning and financial algorithms. Zilliqa has been under research and development for two years. It has powered several ground-breaking deployments commercially to date.
+  - Latest Testnet Trial Run: 2488 TX/S, 6 shards and 3600 nodes.
+- Section 2: contracts as Communicating Automata
+  - ​
 
-#### [Decentralization in Bitcoin and Ethereum Networks](https://arxiv.org/abs/1801.03998)
+#### [Decentralization in Bitcoin and Ethereum Networks](https://arxiv.org/abs/1801.03998) (some workshop@FC 18) (Mar 2, 2018)
 
-- (tbr)
+- Key tool: Falcon relay network
+- Key findings:
+  - Bitcoin network can increase the bandwidth requirements for nodes by a factor of 1.7 and keep the same level of decentralization
+  - Bitcoin network is geographically more clustered than Ethereum, with many nodes likely residing in datacenters
+  - Ethereum has lower mining power utilization than Bitcoin and would benefit from a relay network
+  - small miners experience more volatility in block rewards in Bitcoin and Ethereum
 
-#### [An Empirical Analysis of Smart Contracts: Platforms, Applications, and Design Patterns](https://arxiv.org/abs/1703.06322) ([WTSC 17](http://fc17.ifca.ai/wtsc/)@FC) (Apr 7)
+#### [An Empirical Analysis of Smart Contracts: Platforms, Applications, and Design Patterns](https://arxiv.org/abs/1703.06322) ([WTSC 17](http://fc17.ifca.ai/wtsc/)@FC) (Apr 7, 2017)
 
 - Several platforms for smart contracts have been proposed, and this paper have analyzed the usage of smart contracts from various perspectives. Mainly, by manually analyzing 834 smart contracts from Ethereum (811, verified) and Bitcoin (23), it concludes 5 categories describing smart contracts intended application domain, and 9 design patterns. Among these, they observe that token, authorization, time constraint, and termination are generally the most used patterns. Also, they give the quantitative results in details.
 
@@ -74,13 +101,18 @@
 - attempt to use F* framework to do formal verification on smart contracts
 - Solidity or EVM
 
-#### [A Survey of Attacks on Ethereum Smart Contracts](https://eprint.iacr.org/2016/1007.pdf) (IACR 16)
+#### [A Survey of Attacks on Ethereum Smart Contracts (SoK)](https://eprint.iacr.org/2016/1007.pdf) (Systematization of knowledge paper) (POST 17)
 
-- ​
+> In this paper we provide the first systematic exposition of the security vulnerabilities of Ethereum and of its high-level programming language, Solidity.
+
+- [online examples](http://blockchain.unica.it/projects/ethereum-survey/)
+  - only provides 5 attacks: SimpleDAO (reentry), KotET (mishandled exception and indocile receiver), OddsAndEvens (public secret), Governmental (time constraints and unpredictable states) and dynamic libraries (function visibility), and 1 miscellanea: gasless send.
+  - two Solidity versions: 0.3.1 and 0.4.2
+  -  
 
 #### [Make Smart Contracts Smarter](https://eprint.iacr.org/2016/633.pdf) (IACR 16)
 
-- Oyente, a verification tool using symbolic exectuion. It declares that Oyente can detect four main vulnerabilities: timestamp dependency, front running (money concurrency), mishandled exceptions and reentry bugs. 
+- Oyente, a verification tool using symbolic execution. It declares that Oyente can detect four main vulnerabilities: timestamp dependency, front running (money concurrency), mishandled exceptions and reentry bugs. 
 
 #### [Town Crier: An Authenticated Data Feed for Smart Contracts](https://eprint.iacr.org/2016/168.pdf) (IACR 16)
 
@@ -101,7 +133,12 @@
 
 ### Tools
 
+#### MAIAN
+
+- source code private now
+
 #### [Manticore](https://github.com/trailofbits/manticore)
+
 - Manticore is a symbolic execution tool for analysis of binaries and smart contracts.
   * Linux ELF binaries (x86, x86_64 and ARMv7)
   * EVM bytecode ([video](https://asciinema.org/a/haJU2cl0R0Q3jB9wd733LVosL))
@@ -185,6 +222,7 @@ Executed  6266  instructions.
 
 #### [Securify](https://securify.ch/)
 - [Automatically Detecting the Bug that Froze Parity Wallets](https://medium.com/@SecurifySwiss/automatically-detecting-the-bug-that-froze-parity-wallets-ad2bebebd3b0)
+- [team page](http://www.srl.inf.ethz.ch/securify)
 
 #### [SmartCheck](https://tool.smartdec.net/)
 - provided by [SmartDec](https://smartcontracts.smartdec.net/)  
@@ -201,21 +239,22 @@ Executed  6266  instructions.
 - evm disasm: 
 - Solidity online toolbox
 
-  #### Function Signature
-  - [Keccak-256](https://emn178.github.io/online-tools/keccak_256.html)
-  - [Ethereum Function Signature Database](https://www.4byte.directory/)
 
-  #### [The Truffle Framework](http://truffleframework.com/)
-  - Truffle is the most popular development framework for Ethereum with a mission to make your life a whole lot easier.
-  - Truffle: smart contract compilation, library linking, creation of contract artifacts, interacting with smart contracts on the front-end
-  - Ganache (TestRPC): Personal blockchain and explorer for development   
-    - Quickly fire up a personal Ethereum blockchain which you can use to run tests, execute commands, and inspect state while controlling how the chain operates. 
-  - Drizzle: Reactive web3 and smart contracts for easier integration with JS frameworks (coming soon)
-  - Truffle Box: 
+#### Function Signature
+- [Keccak-256](https://emn178.github.io/online-tools/keccak_256.html)
+- [Ethereum Function Signature Database](https://www.4byte.directory/)
 
-  #### Explorer for Blockchain
-  - [MyEtherWallet](https://www.myetherwallet.com/): 
+#### [The Truffle Framework](http://truffleframework.com/)
+- Truffle is the most popular development framework for Ethereum with a mission to make your life a whole lot easier.
+- Truffle: smart contract compilation, library linking, creation of contract artifacts, interacting with smart contracts on the front-end
+- Ganache (TestRPC): Personal blockchain and explorer for development   
+  - Quickly fire up a personal Ethereum blockchain which you can use to run tests, execute commands, and inspect state while controlling how the chain operates. 
+- Drizzle: Reactive web3 and smart contracts for easier integration with JS frameworks (coming soon)
+- Truffle Box: 
 
+#### Explorer for Blockchain
+- [MyEtherWallet](https://www.myetherwallet.com/): 
+- [getStorageAt](https://medium.com/aigang-network/how-to-read-ethereum-contract-storage-44252c8af925): how to read smart contract storage
 
   #### Decompiler
   - [porosity](https://github.com/comaeio/porosity) [(report)](https://www.comae.io/reports/dc25-msuiche-Porosity-Decompiling-Ethereum-Smart-Contracts-wp.pdf) (July 7, 2017)  [(talk at DEFCON25)](https://www.youtube.com/watch?v=d7EcNyuJy2g)
@@ -283,7 +322,10 @@ Executed  6266  instructions.
 
   ### Semantics
   #### [KEVM](https://github.com/kframework/evm-semantics)
-  #### [LEM](https://github.com/pirapira/eth-isabelle)
+  #### [LEM](https://github.com/mrsmkl/ethereum-lem)
+
+- [Formal Verification of Deed Contract in Ethereum Name Service](https://github.com/pirapira/eth-isabelle) ([pdf](https://yoichihirai.com/deed.pdf))
+  - It verifies a specific contract. The target is the EVM bytecode for "Deed", a contract part of the Ethereum Name Service. The theorem proved through [Isabelle/HOL](https://isabelle.in.tum.de/index.html) states that, upon an invocation of the contract, only its owner can decrease the balance.
 
   ### Virtual Machine
   #### [IELE](https://runtimeverification.com/blog/?p=498)
@@ -295,7 +337,8 @@ Executed  6266  instructions.
 
   ### Useful Resources
   - <https://github.com/pirapira/ethereum-formal-verification-overview>
+  - <https://github.com/pirapira/awesome-ethereum-virtual-machine>
   - [Week in Ethereum News](http://www.weekinethereum.com/)
   - [Solidity Bug Info](https://etherscan.io/solcbuginfo)
-
+  - [Awesome Ethereum](http://awesome-ethereum.com/)
 
