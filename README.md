@@ -17,7 +17,7 @@
   - ​
   - depth-first
   - target at bytecode
-- ​
+- Posthumous contract: dead but can receive ether from transaction. It is a special type of Greedy. ([My test in Ropsten](https://ropsten.etherscan.io/address/0xff97cb4f1aca1c019f0af613664dfff4da7855e3)) ([Contract code](https://ropsten.etherscan.io/address/0x480b60537175df0565f3b69c4748485587288b35#code))
 
 #### [Quantitative Analysis of Smart Contracts](http://pub.ist.ac.at/~akafshda/paperpdfs/esop2018.pdf) (ESOP 18) (Apr 14-20)
 
@@ -108,7 +108,12 @@
 - [online examples](http://blockchain.unica.it/projects/ethereum-survey/)
   - only provides 5 attacks: SimpleDAO (reentry), KotET (mishandled exception and indocile receiver), OddsAndEvens (public secret), Governmental (time constraints and unpredictable states) and dynamic libraries (function visibility), and 1 miscellanea: gasless send.
   - two Solidity versions: 0.3.1 and 0.4.2
-  -  
+-  some notes for function calling process:
+  - Each function is uniquely identified by a signature, based on its name and type parameters. 
+  - If the signature matches one function, the execution will jump to that, else jump to **fallback** function.
+  - Modifier checking happens in function's inter logic.
+  - Sometimes, invocation to fallback function will have `0x3af39c21` in data field.
+  - [My Test Contract in Ropsten](https://ropsten.etherscan.io/address/0x368d72216b96b95c49a6d61ead7b04d182632778)
 
 #### [Make Smart Contracts Smarter](https://eprint.iacr.org/2016/633.pdf) (IACR 16)
 
