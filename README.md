@@ -1,15 +1,19 @@
- # Verification on Ethereum DApps
-  ## State-of-the-art (updating)
-  ### Publication
+# Verification on Ethereum DApps
+## State-of-the-art (updating)
+### Publication
 #### [Finding The Greedy, Prodigal, and Suicidal Contracts at Scale](https://arxiv.org/pdf/1802.06038.pdf) (2018)
 
 >a new systematic characterization of a class of trace vulnerabilities, which result from analyzing multiple invocations of a contract over its lifetime
 >
 >three example properties of such trace vulnerabilities: 
->
->1. **Greedy**: lock funds indefinitely, 
->2. **Prodigal** (very generous, recklessly wasteful): leak ether carelessly to arbitrary users, or 
->3. **Suicidal**: can be killed by anyone.
+
+
+1. **Greedy**: lock funds indefinitely, 
+2. **Prodigal** (very generous, recklessly wasteful): leak ether carelessly to arbitrary users, or 
+3. **Suicidal**: can be killed by anyone.
+
+   1. based on Parity Multi-sig wallet contract, [vulnerable one](https://etherscan.io/address/0x863df6bfa4469f3ead0be8f9f2aae51c91a907b4#code)
+   2. safe one ref: open zeppelin's multi-sig wallet [implementation](https://github.com/OpenZeppelin/zeppelin-solidity/blob/v1.2.0/contracts/MultisigWallet.sol)
 
 - MAIAN
   - the first tool for precisely specifying and reasoning about trace properties, which employs inter-procedural symbolic analysis and concrete validator for exhibiting real exploits.
@@ -261,7 +265,7 @@ Executed  6266  instructions.
 - [MyEtherWallet](https://www.myetherwallet.com/): 
 - [getStorageAt](https://medium.com/aigang-network/how-to-read-ethereum-contract-storage-44252c8af925): how to read smart contract storage
 
-  #### Decompiler
+#### Decompiler
   - [porosity](https://github.com/comaeio/porosity) [(report)](https://www.comae.io/reports/dc25-msuiche-Porosity-Decompiling-Ethereum-Smart-Contracts-wp.pdf) (July 7, 2017)  [(talk at DEFCON25)](https://www.youtube.com/watch?v=d7EcNyuJy2g)
     - Decompiler and Security Analysis tool for Blockchain-based Ethereum Smart-Contracts
     - Three main usages:
