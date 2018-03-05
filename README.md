@@ -21,7 +21,8 @@
   - ​
   - depth-first
   - target at bytecode
-- Posthumous contract: dead but can receive ether from transaction. It is a special type of Greedy. ([My test in Ropsten](https://ropsten.etherscan.io/address/0xff97cb4f1aca1c019f0af613664dfff4da7855e3)) ([Contract code](https://ropsten.etherscan.io/address/0x480b60537175df0565f3b69c4748485587288b35#code))
+- Posthumous contract: dead but can receive ether from **any** transaction. It is a special type of Greedy. ([My test in Ropsten](https://ropsten.etherscan.io/address/0xff97cb4f1aca1c019f0af613664dfff4da7855e3)) ([Contract code](https://ropsten.etherscan.io/address/0x480b60537175df0565f3b69c4748485587288b35#code))
+  - For SUICIDENONEMPTYSTACK test: even if `id'` is an indocile [contract](https://ropsten.etherscan.io/address/0x68179e077ebab4509d1b277cc3e751e9db1b44bf#code), `selfdestruct(id')` will send suicide's remaining ether to `id'`. 
 
 #### [Quantitative Analysis of Smart Contracts](http://pub.ist.ac.at/~akafshda/paperpdfs/esop2018.pdf) (ESOP 18) (Apr 14-20)
 
@@ -239,6 +240,13 @@ Executed  6266  instructions.
 > We have built our own static code analyzer for Solidity. Our full analysis includes complete manual analysis and verification of all the issues reported by SmartCheck.
 
 #### Oyente
+
+#### [Remix - Solidity IDE](http://remix.ethereum.org)
+
+- should pay attention to input format:
+  - address: **"**0xcafecafecafe...**"**
+  - address []: ["0x...", "0x..."]
+  - uint256: 0xcafecafecafe...
 
 ### Other Useful Development Tools or Testing Framework
 #### Disassembler
