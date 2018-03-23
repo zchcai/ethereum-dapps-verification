@@ -1,6 +1,12 @@
 # Verification on Ethereum DApps
 ## State-of-the-art (updating)
 ### Publication
+#### [Designing Secure Ethereum Smart Contracts: A Finite State Machine Based Approach](https://fc18.ifca.ai/preproceedings/101.pdf) (FC 18)
+
+#### [ZEUS: Analyzing Safety of Smart Contracts](https://www.ndss-symposium.org/wp-content/uploads/sites/25/2018/02/ndss2018_09-1_Kalra_paper.pdf) (NDSS 18)
+
+- A good [summary](https://blog.acolyer.org/2018/03/08/zeus-analyzing-safety-of-smart-contracts/) by Adrian Colyer 
+
 #### [Finding The Greedy, Prodigal, and Suicidal Contracts at Scale](https://arxiv.org/pdf/1802.06038.pdf) (2018)
 
 >a new systematic characterization of a class of trace vulnerabilities, which result from analyzing multiple invocations of a contract over its lifetime
@@ -10,6 +16,8 @@
 
 1. **Greedy**: lock funds indefinitely, 
 2. **Prodigal** (very generous, recklessly wasteful): leak ether carelessly to arbitrary users, or 
+
+   1. For section 5.2, Figure 6 example doesn't hold: [test contract](https://ropsten.etherscan.io/address/0x018940b68d3b29b78383b49b0fad1c7be42d7e1c#code)
 3. **Suicidal**: can be killed by anyone.
 
    1. based on Parity Multi-sig wallet contract, [vulnerable one](https://etherscan.io/address/0x863df6bfa4469f3ead0be8f9f2aae51c91a907b4#code)
@@ -54,7 +62,7 @@
 - Section 2: contracts as Communicating Automata
   - ​
 
-#### [Decentralization in Bitcoin and Ethereum Networks](https://arxiv.org/abs/1801.03998) (some workshop@FC 18) (Mar 2, 2018)
+#### [Decentralization in Bitcoin and Ethereum Networks](https://arxiv.org/abs/1801.03998) (WTSC@FC 18) (Mar 2, 2018)
 
 - Key tool: Falcon relay network
 - Key findings:
@@ -99,7 +107,11 @@
 
 #### [A Concurrent Perspective on Smart Contracts](https://arxiv.org/pdf/1702.05511.pdf) (WTSC 17)
 
-- TBR
+- A good [summary](https://blog.acolyer.org/2017/08/30/a-concurrent-perspective-on-smart-contracts/) by Adrian Colyer
+
+#### [Defining the Ethereum Virtual Machine for Interactive Theorem Provers](https://link.springer.com/chapter/10.1007/978-3-319-70278-0_33) (FC 17)
+
+> "To our knowledge, ours is the first formal EVM definition for smart contract verification that implements all instructions. Our definition can serve as a basis for further analysis and generation of Ethereum smart contracts."
 
 #### [Formal verification of Smart Contracts](https://www.cs.umd.edu/~aseem/solidetherplas.pdf) (Short paper, workshop) (PLAS 16)
 
@@ -120,9 +132,13 @@
   - Sometimes, invocation to fallback function will have `0x3af39c21` in data field.
   - [My Test Contract in Ropsten](https://ropsten.etherscan.io/address/0x368d72216b96b95c49a6d61ead7b04d182632778)
 
-#### [Make Smart Contracts Smarter](https://eprint.iacr.org/2016/633.pdf) (IACR 16)
+#### [Make Smart Contracts Smarter](https://eprint.iacr.org/2016/633.pdf) (CCS 16)
 
 - Oyente, a verification tool using symbolic execution. It declares that Oyente can detect four main vulnerabilities: timestamp dependency, front running (money concurrency), mishandled exceptions and reentry bugs. 
+
+#### [Hawk: The Blockchain Model of Cryptography and Privacy-Preserving Smart Contracts](http://ieeexplore.ieee.org/abstract/document/7546538/) (SP 2016)
+
+- ​
 
 #### [Town Crier: An Authenticated Data Feed for Smart Contracts](https://eprint.iacr.org/2016/168.pdf) (IACR 16)
 
@@ -140,6 +156,30 @@
 
 - (TBR)
 
+
+### True Attacks in Real World
+
+#### The DAO in Jun 2016
+
+#### The Parity Bug in Jul 2017
+
+#### The Parity Bug in Nov 2017
+
+### Some thoughts for vulnerabilities
+
+Currently, types of vulnerabilities can be divided as 3 main categories: external calling, internal execution and blockchain limitation. 
+
+Several tools to detect bugs
+
+- Transaction-based: (External)
+
+inter-procedural, trigger + modules
+
+- EVM based: (Internal) (Single)
+
+Intra-procedural
+
+- Chain property: relay network
 
 ### Tools
 
@@ -249,7 +289,14 @@ Executed  6266  instructions.
   - uint256: 0xcafecafecafe...
 
 ### Other Useful Development Tools or Testing Framework
+#### Formal verification framework
+
+- [AxLang: Formally Verifiable Smart Contracts for the Ethereum Ecosystem](https://medium.com/axoni/axlang-formally-verifiable-smart-contracts-for-the-ethereum-ecosystem-6201203be4e8)
+- [Bamboo](https://github.com/pirapira/bamboo)
+- [Certik](https://certik.org/)
+
 #### Disassembler
+
 - evmdis: human readable 
 - hevm: can specify some opcode behaviors
 - opcode-tool: Etherscan online  
@@ -339,18 +386,22 @@ Executed  6266  instructions.
 
   ### Semantics
   #### [KEVM](https://github.com/kframework/evm-semantics)
+
+- K
+  - [ERC20-K](https://runtimeverification.com/blog/?p=496): Formal Executable Specification of ERC20
+
   #### [LEM](https://github.com/mrsmkl/ethereum-lem)
 
 - [Formal Verification of Deed Contract in Ethereum Name Service](https://github.com/pirapira/eth-isabelle) ([pdf](https://yoichihirai.com/deed.pdf))
   - It verifies a specific contract. The target is the EVM bytecode for "Deed", a contract part of the Ethereum Name Service. The theorem proved through [Isabelle/HOL](https://isabelle.in.tum.de/index.html) states that, upon an invocation of the contract, only its owner can decrease the balance.
 
-  ### Virtual Machine
-  #### [IELE](https://runtimeverification.com/blog/?p=498)
 
-  ### Framework
-  #### [embark](https://github.com/iurimatias/embark-framework)
-  > Framework for serverless Decentralized Applications using Ethereum, IPFS and other platforms
+### Virtual Machine
+#### [IELE](https://runtimeverification.com/blog/?p=498)
 
+### Framework
+#### [embark](https://github.com/iurimatias/embark-framework)
+> Framework for serverless Decentralized Applications using Ethereum, IPFS and other platforms
 
   ### Useful Resources
   - <https://github.com/pirapira/ethereum-formal-verification-overview>
