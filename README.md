@@ -219,9 +219,7 @@ Executed  6266  instructions.
 #### [Mythril](https://github.com/ConsenSys/mythril)
 - Reversing and bug hunting framework for the Ethereum blockchain (described in [Ethereum Smart Contract Best Practices](https://consensys.github.io/smart-contract-best-practices/security_tools/))
 
-- [Security analysis tool for Ethereum smart contracts](https://pypi.python.org/pypi/mythril) mythril 0.10.7
-
-- Out of date documentation, [Mythril 0.8.0](https://www.pydoc.io/pypi/mythril-0.8.0/)
+- [Documentation](https://pypi.python.org/pypi/mythril) mythril 0.14.9
 
 - Install
 
@@ -234,11 +232,11 @@ Executed  6266  instructions.
 
 - [Introducing Mythril: A framework for bug hunting on the Ethereum blockchain](https://hackernoon.com/introducing-mythril-a-framework-for-bug-hunting-on-the-ethereum-blockchain-9dc5588f82f6) by [Bernhard Mueller](https://hackernoon.com/@muellerberndt), a security engineer at [ConsenSys](https://new.consensys.net/).
 
-  > full node needs
+> full node needs or use [infura](https://infura.io/)
 
 - [Analyzing Ethereum smart contracts for vulnerabilities](https://hackernoon.com/scanning-ethereum-smart-contracts-for-vulnerabilities-b5caefd995df)
 > In this article, I’ll show how to run different types of security scans with Mythril using smart contracts from the *Ethernaut wargame* as examples (thanks to the guys from *Zeppelin solutions* for giving me permission). If you haven’t tried the wargame yourself, be aware that there are spoilers ahead! I recommend giving it a shot yourself first if you haven’t already.
-- [Mythril: The New Ethereum Blockchain Error Detector](https://steemit.com/blockchain/@rusinho027/mythril-the-new-ethereum-blockchain-error-detector)
+- news: [Mythril: The New Ethereum Blockchain Error Detector](https://steemit.com/blockchain/@rusinho027/mythril-the-new-ethereum-blockchain-error-detector)
 - Upcoming Talk, April 12, 2018, [Smashing Ethereum Smart Contracts for Fun and ACTUAL Profit](https://conference.hitb.org/hitbsecconf2018ams/sessions/smashing-ethereum-smart-contracts-for-fun-and-actual-profit/), by [Bernhard Mueller](https://hackernoon.com/@muellerberndt)
 
 #### [Solidity Parser](https://github.com/consensys/solidity-parser)
