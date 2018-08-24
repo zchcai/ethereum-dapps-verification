@@ -30,7 +30,7 @@
   - depth-first
   - target at bytecode
 - Posthumous contract: dead but can receive ether from **any** transaction. It is a special type of Greedy. ([My test in Ropsten](https://ropsten.etherscan.io/address/0xff97cb4f1aca1c019f0af613664dfff4da7855e3)) ([Contract code](https://ropsten.etherscan.io/address/0x480b60537175df0565f3b69c4748485587288b35#code))
-  - For SUICIDENONEMPTYSTACK test: even if `id'` is an indocile [contract](https://ropsten.etherscan.io/address/0x68179e077ebab4509d1b277cc3e751e9db1b44bf#code), `selfdestruct(id')` will send suicide's remaining ether to `id'`. 
+  - For SUICIDENONEMPTYSTACK test: even if `id'` is an indocile [contract](https://ropsten.etherscan.io/address/0x68179e077ebab4509d1b277cc3e751e9db1b44bf#code), `selfdestruct(id')` will send suicide's remaining ether to `id'`.  In other words, any contract can't prevent Ether accepting. Or we say, we can use `selfdestruct(id')` to send Ether to any contract.
 
 #### [Quantitative Analysis of Smart Contracts](http://pub.ist.ac.at/~akafshda/paperpdfs/esop2018.pdf) (ESOP 18) (Apr 14-20)
 
@@ -185,13 +185,13 @@ Intra-procedural
 
 #### MAIAN
 
-- source code private now
+- [source code](https://github.com/MAIAN-tool/MAIAN)
 
 #### [Manticore](https://github.com/trailofbits/manticore)
 
 - Manticore is a symbolic execution tool for analysis of binaries and smart contracts.
   * Linux ELF binaries (x86, x86_64 and ARMv7)
-  * EVM bytecode ([video](https://asciinema.org/a/haJU2cl0R0Q3jB9wd733LVosL))
+  * EVM bytecode ([video 1](https://asciinema.org/a/142996)) ([video 2](https://asciinema.org/a/154012))
     * Folder *example* provides *coverage*, *minimal* and so on. Mainly simple usages of API.
 - [Manticore: Symbolic execution for humans](https://blog.trailofbits.com/2017/04/27/manticore-symbolic-execution-for-humans/)
 - Dynamic binary analysis tool with EVM support (described in [Ethereum Smart Contract Best Practices](https://consensys.github.io/smart-contract-best-practices/security_tools/))
@@ -210,7 +210,7 @@ Message: It is less than or equal to 0x41
 ```
 - API
   * [API Reference](http://manticore.readthedocs.io/en/latest/api.html)
-  * [Manticore Documentation 0.1.0](https://media.readthedocs.org/pdf/manticore/latest/manticore.pdf) (released on Jan 30, 2018)
+  * [Manticore Documentation 0.1.0](https://media.readthedocs.org/pdf/manticore/latest/manticore.pdf) (released on Mar 22, 2018)
 ```
 czc@vultr:~/manticore/examples/script$ python count_instructions.py ../linux/helloworld   
 Executed  6266  instructions. 
@@ -279,12 +279,41 @@ Executed  6266  instructions.
 
 #### Oyente
 
+#### [EthFiddle](https://ethfiddle.com/) Solidity IDE in the Browser
+
+- Powered By Loom Network
+
+####[Vyper online](https://vyper.online/)
+
+- [Documentation](https://vyper.readthedocs.io/en/latest/index.html)
+- [Github repo](https://github.com/ethereum/vyper)
+- Install: `pip install vyper`, Python 3 required.
+- `vyper-run`: support some features as `hevm`.
+
 #### [Remix - Solidity IDE](http://remix.ethereum.org)
 
 - should pay attention to input format:
   - address: **"**0xcafecafecafe...**"**
   - address []: ["0x...", "0x..."]
   - uint256: 0xcafecafecafe...
+- **Security**
+  - Transaction origin: Warn if tx.origin is used
+  - Check effects: Avoid potential reentrancy bugs
+  - Inline assembly: Use of Inline Assembly
+  - Block timestamp: Semantics maybe unclear
+  - Low level calls: Semantics maybe unclear
+  - Block.blockhash usage: Semantics maybe unclear
+  - Selfdestruct: Be aware of caller contracts.
+- **Gas & Economy**
+  - Gas costs: Warn if the gas requirements of functions are too high.
+  - This on local calls: Invocation of local functions via this
+  - Delete on dynamic Array: Use require and appropriately
+- **Miscellaneous**
+  - Constant functions: Check for potentially constant functions
+  - Similar variable names: Check if variable names are too similar
+  - no return: Function with return type is not returning
+  - Guard Conditions: Use require and appropriately
+  - Result not used: The result of an operation was not used.
 
 ### Other Useful Development Tools or Testing Framework
 #### Formal verification framework
@@ -296,6 +325,8 @@ Executed  6266  instructions.
 #### Disassembler
 
 - evmdis: human readable 
+  - `echo -n $(cat your.bin-runtime) > true.bin-runtime`
+  - `cat true.bin-runtime | evmdis > your.disasm`
 - hevm: can specify some opcode behaviors
 - opcode-tool: Etherscan online  
 - evm disasm: 
@@ -388,7 +419,7 @@ Executed  6266  instructions.
 - K
   - [ERC20-K](https://runtimeverification.com/blog/?p=496): Formal Executable Specification of ERC20
 
-  #### [LEM](https://github.com/mrsmkl/ethereum-lem)
+#### [LEM](https://github.com/mrsmkl/ethereum-lem)
 
 - [Formal Verification of Deed Contract in Ethereum Name Service](https://github.com/pirapira/eth-isabelle) ([pdf](https://yoichihirai.com/deed.pdf))
   - It verifies a specific contract. The target is the EVM bytecode for "Deed", a contract part of the Ethereum Name Service. The theorem proved through [Isabelle/HOL](https://isabelle.in.tum.de/index.html) states that, upon an invocation of the contract, only its owner can decrease the balance.
@@ -406,5 +437,6 @@ Executed  6266  instructions.
   - <https://github.com/pirapira/awesome-ethereum-virtual-machine>
   - [Week in Ethereum News](http://www.weekinethereum.com/)
   - [Solidity Bug Info](https://etherscan.io/solcbuginfo)
-  - [Awesome Ethereum](http://awesome-ethereum.com/)
+  - [Awesome Ethereum](http://awesome-ethereum.com/) 
+  - [awesome-solidity](https://github.com/bkrem/awesome-solidity)
 
